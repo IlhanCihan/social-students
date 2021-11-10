@@ -50,26 +50,23 @@
     </ul>
 
 </nav>
-<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-<!--To post your content-->
-<div class="container">
-    {% for post in posts %}
-    <div>
-        <h1>{{post[1]}}</h1>
-        <h6>@{{post[5]}}</h6>
-        <h3>{{post[2]}}</h3>
-        <p>{{post[3]}}</p>
-        <p style="color: darkslategray">Topic: {{post[4]}}</p>
-        <hr>
-    </div>
-    {% endfor %}
-</div>
-</main>
-</body>
 
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        {% for user in users %}
+        <div>
+            <h1>{{user[1]}}</h1>
+            <h2>@{{user[4]}}</h2>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+
+</body>
 </html>
 
-<!--usually better when its on css file-->
 <style>
     ul li a .icon {
         width: 40px; /* changing the width of the icon */

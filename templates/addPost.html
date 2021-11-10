@@ -50,26 +50,43 @@
     </ul>
 
 </nav>
-<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-<!--To post your content-->
-<div class="container">
-    {% for post in posts %}
-    <div>
-        <h1>{{post[1]}}</h1>
-        <h6>@{{post[5]}}</h6>
-        <h3>{{post[2]}}</h3>
-        <p>{{post[3]}}</p>
-        <p style="color: darkslategray">Topic: {{post[4]}}</p>
-        <hr>
-    </div>
-    {% endfor %}
-</div>
-</main>
-</body>
 
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+        <div class="container">
+    <div class="col-12">
+        <h1 class="text-center">Add Post</h1>
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="text" name="title" class="form-control" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <input type="text" name="description" class="form-control" placeholder="Enter short description">
+            </div>
+
+            <div class="form-group">
+                <textarea rows="14" cols="50" name="content" class="form-control"
+                          placeholder="Enter text here..."> </textarea>
+            </div>
+            <br>
+            <p class="text-center"> Tags:</p>
+            <div class="form-group text-center" style="padding-right:15%">
+                <label class="radio-inline"><input type="radio" name="tag" value="mathematics" checked>Mathematics</label>
+                <label class="radio-inline"><input type="radio" name="tag" value="physics">Physics</label>
+                <label class="radio-inline"><input type="radio" name="tag" value="computer_Science">Computer Science</label>
+                <label class="radio-inline"><input type="radio" name="tag" value="art">Art</label>
+                <label class="radio-inline"><input type="radio" name="tag" value="advanced_software_programming">Advanced software programming</label>
+                <label class="radio-inline"><input type="radio" name="tag" value="other">Other</label>
+            </div>
+            <button type="submit" class="btn btn-secondary  btn-block mb-3 text-center">Add</button>
+        </form>
+    </div>
+        </div>
+    </main>
+
+
+</body>
 </html>
 
-<!--usually better when its on css file-->
 <style>
     ul li a .icon {
         width: 40px; /* changing the width of the icon */
@@ -78,6 +95,14 @@
 
         overflow: hidden;
         margin: 0 auto 10px;
+    }
+    .navbar.center .navbar-inner {
+        text-align: center;
+    }
+
+    .navbar.center .navbar-inner .nav {
+        display:inline-block;
+        float: none;
     }
     ul li a .icon .fa{
         width: 100%;
@@ -95,6 +120,9 @@
         font-size: 18px; /* changing font size */
         line-height: 20px;
         transition: 0.5s; /* adding the transition to make it more attractive */
+        display:inline-block;
+        float: none;
+        text-align: center;
 
     }
 </style>

@@ -10,7 +10,11 @@ def index():
     if 'logged_in' not in session:
         return redirect("/login")
     else:
-        return render_template('index.html')
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            cur.execute("select * from posts")
+        posts = cur.fetchall()
+        return render_template('index.html', posts=posts)
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -21,10 +25,10 @@ def register():
         registered = False
         if request.method == 'POST':
             with sql.connect("database.db") as con:
-                conn = con.cursor()
-                conn.execute(
+                cur = con.cursor()
+                cur.execute(
                     "select * from users where username=?", (str(request.form['username']),))
-            username_exists = conn.fetchall()
+            username_exists = cur.fetchall()
 
             try:
                 if username_exists:
@@ -64,7 +68,7 @@ def login():
 
                 row = cur.fetchone()
                 if row is None:
-                    msg.append('Username or password is incorrect!')
+                    msg.append('Error')
 
                 else:
                     msg.append('Logged in successfully!')
@@ -78,6 +82,33 @@ def login():
     else:
         return redirect("/")
 
+
+@app.route('/addPost', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            cur.execute(
+                "INSERT INTO posts (title, description, content, tag, username) VALUES(?, ?, ?, ?,?)",
+                (request.form["title"], request.form["description"], request.form["content"], request.form["tag"], session["username"]))
+            con.commit()
+
+        return redirect("/")
+    else:
+
+        return render_template('addPost.html')
+
+
+@app.route('/followers')
+def follower():
+    if 'logged_in' not in session:
+        return redirect("/login")
+    else:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            cur.execute("select * from users")
+        users = cur.fetchall()
+        return render_template('followers.html', users=users)
 
 if __name__ == "__main__":
     app.run(debug=True)
